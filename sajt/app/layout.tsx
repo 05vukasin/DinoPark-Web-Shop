@@ -4,8 +4,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="sr">
+      <body suppressHydrationWarning className="bg-gray-100">
+        {children}
+      </body>
     </html>
   );
 }
