@@ -127,12 +127,7 @@ export default function ProductForm({ product }: { product?: Product }) {
                     type="number"
                     className="primary-input"
                 />
-                <ImageInput
-                    imageUrl={imageUrl}
-                    setImageUrl={setImageUrl}
-                    imageFile={imageFile}
-                    setImageFile={setImageFile}
-                />
+                
                 <button
                     disabled={loading}
                     onClick={product ? updateProduct : createProduct}
