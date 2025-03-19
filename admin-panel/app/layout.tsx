@@ -10,8 +10,8 @@ config.autoAddCss = false
 const noto = Noto_Sans({ subsets: ["latin"], variable: "--font-noto" })
 
 export const metadata: Metadata = {
-    title: "Fullfillio",
-    description: "Fullfillio App",
+    title: "DinoPark",
+    description: "DinoPark App",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

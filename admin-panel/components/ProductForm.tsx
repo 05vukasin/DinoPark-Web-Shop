@@ -7,6 +7,7 @@ import { useState } from "react"
 import Input from "./Input"
 import ImageInput from "./ImageInput"
 import { useRouter } from "next/navigation"
+import DeleteProductButton from "./DeleteProductButton"
 
 export default function ProductForm({ product }: { product?: Product }) {
     const router = useRouter()
@@ -14,7 +15,7 @@ export default function ProductForm({ product }: { product?: Product }) {
 
     const [description, setDescription] = useState(product?.description || "")
 
-    const [price, setPrice] = useState(product?.price.toString() || "")
+    const [price, setPrice] = useState(product?.price ? product?.price.toString() : "")
 
     const [imageFile, setImageFile] = useState<File>()
     const [imageUrl, setImageUrl] = useState("")
@@ -50,7 +51,9 @@ export default function ProductForm({ product }: { product?: Product }) {
                 const resBody = await res.json()
             }
 
-            router.push(`/products/${newProductId}`)
+            if (newProductId) {
+                router.push(`/products/${newProductId}`)
+            }
         } catch (error) {}
         setLoading(false)
     }
@@ -138,6 +141,14 @@ export default function ProductForm({ product }: { product?: Product }) {
                     {product ? "Update product" : "Save product"}
                 </button>
             </div>
+            {product ? (
+                <div>
+                    <div className="my-8 h-px bg-gray-200 w-full"></div>
+                    <DeleteProductButton product={product} />
+                </div>
+            ) : (
+                ""
+            )}
         </div>
     )
 }

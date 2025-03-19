@@ -5,19 +5,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
 
 export default async function page({ params: { id } }: { params: { id: string } }) {
-    let product: Product | undefined = undefined
+    let product: Product | undefined
 
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/Product/${id}`)
-        product = await res.json()
+        if (res.ok) {
+            product = await res.json()
+        }
     } catch (error) {
         console.error(error)
     }
 
+    console.log(product)
+
     if (!product) {
         return (
             <div className="p-4">
-                <h1 className="text-2xl mb-4 font-semibold">Product not found</h1>
+                <div className="flex gap-3 items-center mb-4 ">
+                    <h1 className="text-2xl  font-semibold">Product not found</h1>
+                    <Link
+                        href={"/products"}
+                        className="primary-button"
+                    >
+                        <FontAwesomeIcon icon={faArrowLeft} />
+                        Products
+                    </Link>
+                </div>
             </div>
         )
     }
