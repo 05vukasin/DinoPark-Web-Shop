@@ -43,7 +43,7 @@ const Hero = () => {
 
        
         <motion.a
-  href="#shop"
+  href="shop"
   className="mt-5 inline-block bg-green-500 text-white font-bold py-3 px-6 text-2xl rounded-lg shadow-lg transition"
   animate={{ scale: [1, 1.1, 1] }} // Efekat laganog povećanja i smanjivanja
   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} // Polako menja veličinu u loop-u
