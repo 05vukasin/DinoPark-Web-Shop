@@ -1,29 +1,26 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { LanguageContext } from "./layout"; // Uvoz konteksta jezika
 
 const Navbar = () => {
-  const [language, setLanguage] = useState("sr");
+  const { language, setLanguage } = useContext(LanguageContext); // Dobijamo globalni jezik
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const changeLanguage = () => {
-    setLanguage((prevLang) => (prevLang === "sr" ? "en" : "sr"));
+    setLanguage(language === "sr" ? "en" : "sr");
   };
 
   return (
@@ -38,8 +35,8 @@ const Navbar = () => {
           <Image
             src="/logo.png"
             alt="DinoPark Logo"
-            width={120}
-            height={60}
+            width={60}
+            height={30}
             className="cursor-pointer transform transition duration-300 hover:scale-110"
           />
         </Link>
@@ -67,7 +64,7 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {/* Language Toggle */}
+        {/* Language Toggle (samo za desktop) */}
         <div className="hidden md:flex ml-6 space-x-4">
           <button onClick={changeLanguage}>
             {language === "sr" ? (
@@ -90,7 +87,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button (burger dugme) */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-white text-2xl"
@@ -117,13 +114,16 @@ const Navbar = () => {
               key={index}
               href={`#${item.id}`}
               className="text-lg hover:text-green-400 transition"
+              onClick={() => setMenuOpen(false)} // Zatvori meni nakon klika
             >
               {language === "sr"
                 ? item.name
                 : ["About", "Gallery", "Contact", "Activities"][index]}
             </a>
           ))}
-          <button onClick={changeLanguage}>
+          
+          {/* Language Toggle u mobilnom meniju */}
+          <button onClick={changeLanguage} className="mt-2">
             {language === "sr" ? (
               <Image
                 src="/uk-flag.png"

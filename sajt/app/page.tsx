@@ -1,3 +1,11 @@
+import Hero from "./components/Hero";
+import About from "./components/About";
+
 export default function Home() {
-  return <div>{/* Sadržaj stranice */}</div>;
+  return (
+    <main>
+      <Hero />
+      <About />
+    </main>
+  );
 }
