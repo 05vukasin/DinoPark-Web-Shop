@@ -21,11 +21,7 @@ const Navbar = () => {
 
   // Dodajemo `overflow-hidden` na <body> kada je meni otvoren
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = menuOpen ? "hidden" : "auto";
   }, [menuOpen]);
 
   const changeLanguage = () => {
@@ -38,7 +34,7 @@ const Navbar = () => {
         scrolled ? "bg-black/80 backdrop-blur-md shadow-lg" : "bg-black"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
         {/* Logo */}
         <Link href="#home">
           <Image
@@ -99,60 +95,60 @@ const Navbar = () => {
         {/* Mobile Menu Button (burger dugme) */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white text-2xl"
+          className="md:hidden text-white text-3xl z-100"
         >
           {menuOpen ? "✖" : "☰"}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: menuOpen ? "0%" : "100%" }}
-        transition={{ duration: 0.3 }}
-        className={`fixed top-0 right-0 w-full h-screen bg-black text-white flex flex-col items-center justify-center space-y-6 z-50 md:hidden ${
-          menuOpen ? "block" : "hidden"
-        }`}
-      >
-        {[
-          { name: "O nama", id: "about" },
-          { name: "Galerija", id: "gallery" },
-          { name: "Kontakt", id: "contact" },
-          { name: "Aktivnosti", id: "activities" },
-        ].map((item, index) => (
-          <a
-            key={index}
-            href={`#${item.id}`}
-            className="text-xl hover:text-green-400 transition"
-            onClick={() => setMenuOpen(false)} // Zatvori meni nakon klika
-          >
-            {language === "sr"
-              ? item.name
-              : ["About", "Gallery", "Contact", "Activities"][index]}
-          </a>
-        ))}
+      {menuOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed top-0 left-0 w-full h-screen bg-black text-white flex flex-col items-center justify-center space-y-6 z-50 md:hidden"
+        >
+          {[
+            { name: "O nama", id: "about" },
+            { name: "Galerija", id: "gallery" },
+            { name: "Kontakt", id: "contact" },
+            { name: "Aktivnosti", id: "activities" },
+          ].map((item, index) => (
+            <a
+              key={index}
+              href={`#${item.id}`}
+              className="text-xl hover:text-green-400 transition"
+              onClick={() => setMenuOpen(false)} // Zatvori meni nakon klika
+            >
+              {language === "sr"
+                ? item.name
+                : ["About", "Gallery", "Contact", "Activities"][index]}
+            </a>
+          ))}
 
-        {/* Language Toggle u mobilnom meniju */}
-        <button onClick={changeLanguage} className="mt-4">
-          {language === "sr" ? (
-            <Image
-              src="/uk-flag.png"
-              alt="EN"
-              width={30}
-              height={20}
-              className="rounded shadow-md hover:opacity-80 transition"
-            />
-          ) : (
-            <Image
-              src="/serbia-flag.png"
-              alt="SR"
-              width={30}
-              height={20}
-              className="rounded shadow-md hover:opacity-80 transition"
-            />
-          )}
-        </button>
-      </motion.div>
+          {/* Language Toggle u mobilnom meniju */}
+          <button onClick={changeLanguage} className="mt-4">
+            {language === "sr" ? (
+              <Image
+                src="/uk-flag.png"
+                alt="EN"
+                width={30}
+                height={20}
+                className="rounded shadow-md hover:opacity-80 transition"
+              />
+            ) : (
+              <Image
+                src="/serbia-flag.png"
+                alt="SR"
+                width={30}
+                height={20}
+                className="rounded shadow-md hover:opacity-80 transition"
+              />
+            )}
+          </button>
+        </motion.div>
+      )}
     </header>
   );
 };
