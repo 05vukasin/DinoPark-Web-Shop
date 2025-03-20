@@ -39,11 +39,8 @@ const ShopPage = () => {
   }, []);
 
   return (
-    <section className="bg-white min-h-screen py-20 px-6">
+    <section className="bg-white min-h-screen py-20 px-6 mt-24">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-10">
-          Dino Park Shop
-        </h1>
 
         {/* Prikaz učitavanja */}
         {loading && (
@@ -63,24 +60,28 @@ const ShopPage = () => {
             {products.map((product) => (
               <div
                 key={product.id}
-                className="bg-gray-100 p-4 rounded-lg shadow-md hover:shadow-lg transition"
+                className="bg-gray-100 rounded-lg shadow-lg hover:shadow-2xl transition overflow-hidden"
               >
+                {/* Slika zauzima 100% širine kartice, bez paddinga */}
                 <div className="relative w-full h-64">
                   <Image
                     src={product.imageUrl}
                     alt={product.name}
                     layout="fill"
                     objectFit="cover"
-                    className="rounded-md"
+                    className="rounded-t-lg"
                   />
                 </div>
-                <h2 className="mt-4 text-lg font-semibold text-gray-800">
-                  {product.name}
-                </h2>
-                <p className="text-gray-600 mt-1">{product.description}</p>
-                <p className="text-green-600 font-bold text-lg mt-2">
-                  {product.price} RSD
-                </p>
+
+                {/* Tekstualni deo kartice */}
+                <div className="p-4">
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    {product.name}
+                  </h2>
+                  <p className="text-gray-600 font-bold text-lg mt-2">
+                    {product.price} RSD
+                  </p>
+                </div>
               </div>
             ))}
           </div>
