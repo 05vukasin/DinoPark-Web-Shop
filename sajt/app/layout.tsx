@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "./Navbar"; // Import Navbar
 
 export const metadata: Metadata = {
-  title: "Next.js Tailwind Test",
-  description: "Testing Tailwind setup in Next.js",
+  title: "DinoPark",
+  description: "Najveći zabavno-edukativni park na Balkanu",
 };
 
 export default function RootLayout({
@@ -12,8 +13,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="antialiased bg-gray-100 text-gray-900">{children}</body>
+    <html lang="sr">
+      <body
+        suppressHydrationWarning={true}
+        className="bg-gray-100 text-gray-900"
+      >
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
