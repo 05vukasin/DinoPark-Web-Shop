@@ -9,9 +9,9 @@ const About = () => {
   const { language } = useContext(LanguageContext); // Dobijamo jezik iz globalnog konteksta
 
   return (
-    <section id="about" className="py-20 bg-gray-900 text-white relative overflow-hidden">
-      {/* Animirani gradient u pozadini */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-gray-900 opacity-60"></div>
+    <section id="about" className="relative bg-black text-white overflow-visible py-20">
+      
+      
 
       <div className="max-w-7xl mx-auto px-6 lg:flex lg:items-center relative z-10">
         {/* Tekst sa animacijom */}
@@ -43,7 +43,7 @@ const About = () => {
           <div className="relative w-full max-w-lg">
            
             {/* Pseudo-element za dodatni svetlosni efekat */}
-            <div className="absolute -inset-6 bg-green-500 blur-3xl opacity-80 rounded-lg z-0 before:absolute before:-inset-2 before:bg-green-400 before:blur-2xl before:opacity-50 before:rounded-lg"></div>
+            <div className="absolute -inset-10 bg-green-500 blur-[40px] opacity-50 rounded-lg z-0"></div>
 
             {/* Slika sada ima najveći z-index da ne bude pokrivena */}
             <Image
