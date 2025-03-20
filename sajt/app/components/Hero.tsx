@@ -24,12 +24,22 @@ const Hero = () => {
         transition={{ duration: 1 }}
         className="relative z-10 px-6"
       >
-        <h1 className="text-4xl md:text-6xl font-bold drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)]">
-          {language === "sr" ? "Dobrodošli u Dino Park" : "Welcome to Dino Park"}
-        </h1>
-        <p className="mt-4 text-lg md:text-xl drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)]">
-          {language === "sr" ? "Najveći zabavno-edukativni park na Balkanu!" : "The largest educational and entertainment park in the Balkans!"}
-        </p>
+       <h1 className="text-4xl md:text-6xl font-bold drop-shadow-[0_5px_15px_rgba(0,0,0,1)]">
+  {language === "sr" ? "Dobrodošli u " : "Welcome to "}<br></br>
+  <motion.span
+    className="text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-green-400 to-green-600 text-transparent bg-clip-text"
+    initial={{ scale: 0.9 }}
+    animate={{ scale: 1 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+  >
+    {language === "sr" ? "DINO PARK" : "DINO PARK"}
+  </motion.span>
+</h1>
+
+
+<p className="mt-4 text-lg md:text-xl drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]">
+  {language === "sr" ? "Najveći zabavno-edukativni park na Balkanu!" : "The largest educational and entertainment park in the Balkans!"}
+</p>
 
        
         <motion.a
